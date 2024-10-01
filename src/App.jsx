@@ -2,20 +2,15 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Card from './components/Card/Card'
 import { toast, ToastContainer } from 'react-toast'
+import { Api } from './api/api'
 
 function App() {
-
   const [devmons, setDevmons] = useState([])
 
   async function fetchData() {
+    const apiUrl = Api.personagem.readAll()
 
-    const apiUrl = 'https://backend-integrar-com-frontend-c290.onrender.com/personagem'
-
-
-    const response = await fetch(apiUrl).catch(function (error){
-      console.error('Erro ao chamar endpoint /personagem', error)
-      toast.error('Erro ao garregar lista de DevMons.')
-    })
+    const response = await Api.buildApiGetRequest(apiUrl)
 
     if (response.ok) {
       const data = await response.json()
@@ -23,9 +18,6 @@ function App() {
     } else {
       toast.error('Erro ao garregar lista de DevMons.')
     }
-
-    console.error(error)
-
   }
 
   useEffect(function () {
