@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import Card from './components/Card/Card'
-import { toast, ToastContainer } from 'react-toast'
+import { ToastContainer, toast } from 'react-toast'
 import { Api } from './api/api'
 
 function App() {
@@ -14,9 +14,10 @@ function App() {
 
     if (response.ok) {
       const data = await response.json()
+
       setDevmons(data)
     } else {
-      toast.error('Erro ao garregar lista de DevMons.')
+      toast.error('Erro ao carregar lista de DevMon')
     }
   }
 
@@ -26,7 +27,7 @@ function App() {
 
   return (
     <>
-      <div className='cards'>
+      <div className="cards">
         {devmons.map(function (devmon) {
           return <Card key={devmon.nome} item={devmon} />
         })}
