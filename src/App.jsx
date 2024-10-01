@@ -1,9 +1,10 @@
+import { useEffect, useState } from 'react'
 import './App.css'
 import Card from './components/Card/Card'
 
 function App() {
 
-  const devmons = []
+  const [devmons, setDevmons] = useState([])
 
   async function fetchData() {
 
@@ -13,10 +14,15 @@ function App() {
 
     const data = await response.json()
 
-    console.log(45, data)
+    setDevmons(data)
+
+    devmons.push(...data)
+
   }
 
-  fetchData()
+  useEffect(function () {
+    fetchData()
+  }, [])
 
   return (
     <>
